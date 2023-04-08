@@ -1,8 +1,8 @@
 # Smart Contract Management System
 
-> ### 하이퍼레저 패브릭에서 스마트 컨트랙트에 대한
-> ### 재사용성, 확장성을 지원하기 위한 스마트 컨트랙트 관리 시스템입니다.
-> ### 하이퍼레저 패브릭에 대한 접근성, 이용성 증대를 목표로 하였습니다.
+> #### 하이퍼레저 패브릭에서 스마트 컨트랙트에 대한
+> #### 재사용성, 확장성을 지원하기 위한 스마트 컨트랙트 관리 시스템입니다.
+> #### 하이퍼레저 패브릭에 대한 접근성, 이용성 증대를 목표로 하였습니다.
 
 ### 목차
 [1. 주요 기능](#주요-기능)<br>
@@ -63,6 +63,7 @@ func SetConnection() {
 	ContractPass = network.GetContract(chaincodeName)
 }
 ```
+---
 #### 트랜잭션
 ```golang
 func TransferAsset(contract *client.Contract, transactionRequest TransactionRequest) string {
@@ -82,6 +83,7 @@ func TransferAsset(contract *client.Contract, transactionRequest TransactionRequ
 	return string(submitResult)
 }
 ```
+---
 #### Elastic Search 
 ```golang
 type elasticClient struct {
@@ -130,6 +132,7 @@ func esClientConfig() elasticsearch.Config {
 	return cfg
 }
 ```
+---
 #### Elastic Search 검색
 ```golang
 func AddDocumentToES(item *Article) (string, error) {
@@ -168,14 +171,16 @@ func AddDocumentToES(item *Article) (string, error) {
 	return "Contract successfully added to search index", nil
 }
 ```
+---
 ### 이미지
 |정보|페이지|
 |---|---|
-|<p align="center">스마트 컨트랙트<br>업로드</p>|<img src=https://user-images.githubusercontent.com/78259314/230725409-607a57a0-d802-4328-b78e-b2194b9fd61d.png width=500, height=500 />|
+|<p style="font-size:10pt" align="center">스마트 컨트랙트<br>업로드</p>|<img src=https://user-images.githubusercontent.com/78259314/230725409-607a57a0-d802-4328-b78e-b2194b9fd61d.png width=500, height=500 />|
 |<p align="center">스마트 컨트랙트<br>리스트</p>|<img src=https://user-images.githubusercontent.com/78259314/230725407-d1db0fb6-fc71-4119-8175-f9b651ae3cd4.png width=600, height=300/>|
 |<p align="center">스마트 컨트랙트<br>상세 정보</p>|<img src=https://user-images.githubusercontent.com/78259314/230725428-af70880a-5dd2-4c75-99c8-4763ac4e7515.png width=700, height=500/>|
 |<p align="center">스마트 컨트랙트<br>비교</p>|<img src=https://user-images.githubusercontent.com/78259314/230725432-1d3bbc23-a9df-4648-bb04-f93578ab3014.png width=700, height=500/>|
 |<p align="center">트랜잭션<br>이벤트</p>|<img src=https://user-images.githubusercontent.com/78259314/230725426-532dad08-5f41-495e-8f3a-3f40a294102d.png width=500, height=300/>|
+|<img width=150/>||
 
 ## 평가
 > 본 프로젝트에서는 하이퍼레저 패브릭 네트워크와 연결하기 위해 Fabric Gateway SDK를 활용하였으며,<br>
@@ -198,7 +203,6 @@ func AddDocumentToES(item *Article) (string, error) {
   - => 결과적으로 첫 번째 튀는 값을 제외한 나머지들을 통해서 min,avg,max 값을 평가함.
 
 ### Charts
-
 | | |
 |---|---|
 |![img1](https://user-images.githubusercontent.com/78259314/230723374-26c2b3e4-9c85-409f-94bc-78ec8fea9010.png)|![img2](https://user-images.githubusercontent.com/78259314/230723436-cb8fa374-dc61-417e-9c9c-4d26c184e6b9.png)|
