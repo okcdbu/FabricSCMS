@@ -209,6 +209,7 @@ func AddDocumentToES(item *Article) (string, error) {
 |<p align="center">전체 비교</p>|<p align="center">최대</p>|
 |![img3](https://user-images.githubusercontent.com/78259314/230723533-4070e3ba-3ed0-4768-8938-afb6b3928e4c.png)|![img4](https://user-images.githubusercontent.com/78259314/230723537-37b80b56-503f-483a-82cb-57853cca28da.png)|
 |<p align="center">평균</p>|<p align="center">최소</p>|
+<br>
 
 ## 결과
 - SDK가 CLI보다 성능이 뛰어남.
