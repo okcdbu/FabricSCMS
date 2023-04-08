@@ -1,18 +1,23 @@
 # Smart Contract Management System
 
-### 하이퍼레저 패브릭에서 스마트 컨트랙트에 대한 재사용성, 확장성을 지원하기 위한 스마트 컨트랙트 관리 시스템입니다.
+> ### 하이퍼레저 패브릭에서 스마트 컨트랙트에 대한
+> ### 재사용성, 확장성을 지원하기 위한 스마트 컨트랙트 관리 시스템입니다.
+> ### 하이퍼레저 패브릭에 대한 접근성, 이용성 증대를 목표로 하였습니다.
 
 ### 목차
 [1. 주요 기능](#주요-기능)<br>
 [2. 사용 기술](#사용-기술)<br>
 [3. 아키텍처 및 흐름도](#아키텍처-및-흐름도)<br>
 [4. 개발](#개발)<br>
-[5. 평가](#평가)<br>
+&emsp;[4-1. 코드](#코드)<br>
+&emsp;[4-2. 이미지](#이미지)<br>
+[5. 평가](#평가)<br><br>
 
 ## 주요 기능
 - 스마트 컨트랙트 업로드
 - 스마트 컨트랙트 대시보드 - 스마트 컨트랙트 검색 / 비교
 - 스마트 컨트랙트 상세 정보 - 설치 / 다운로드 / 트랜잭션
+<br>
 
 ## 사용 기술
 - 프론트 : React(Typescript)
@@ -20,14 +25,16 @@
 - 검색 엔진 & 스토리지 : Elastic Search
 - 블록체인 : Hyperledger Fabric, Fabric Gateway SDK
 - 테스트 : Jmeter, Postman
+<br>
 
 ## 아키텍처 및 흐름도
 |아키텍처|흐름도|
 |---|---|
 |<img src=https://user-images.githubusercontent.com/78259314/230726935-6c76b1b7-1957-4b9e-a183-929de5144264.png />|<img src=https://user-images.githubusercontent.com/78259314/230726938-931d3093-c87a-4382-bc0d-219458cce80c.png />|
+<br>
 
 ## 개발
-### 
+### 코드
 #### 게이트웨이 연결
 ```golang
 func SetConnection() {
@@ -172,7 +179,7 @@ func AddDocumentToES(item *Article) (string, error) {
 > 본 프로젝트에서는 하이퍼레저 패브릭 네트워크와 연결하기 위해 Fabric Gateway SDK를 활용하였으며,<br>
 명령어 기반 실행과 SDK 기반 트랜잭션 성능을 평가하였다.
 
-테스트 방법
+#### 테스트 방법
 - SDK
   - 플랫폼과 연결하는 시간은 포함되지 않음.
   - REST API 요청 ->응답 사이의 시간을 측정하였음.
@@ -182,7 +189,7 @@ func AddDocumentToES(item *Article) (string, error) {
   - 반복문-쉘스크립트 -> 동작-쉘스크립트 형태로 반복 수행하였음.
   - 데이터는 파이프라인을 통해 기록하고 이를 쉘스크립트를 통해 min,avg,max 로 종합, 정리함.
 
-특이사항
+#### 특이사항
 - CLI 첫 값의 latency가 매우 큼
   - 아마 connection 문제일 듯, Gateway는 connection pool이 존재함.
   - 99% line의 값과 maximum값의 차이가 매우 큼, 이는 한 값이 매우 튐을 추측할 수 있음.
