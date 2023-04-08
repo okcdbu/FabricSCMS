@@ -2,6 +2,13 @@
 
 ### 하이퍼레저 패브릭에서 스마트 컨트랙트에 대한 재사용성, 확장성을 지원하기 위한 스마트 컨트랙트 관리 시스템입니다.
 
+### 목차
+[1. 주요 기능](#주요-기능)<br>
+[2. 사용 기술](#사용-기술)<br>
+[3. 아키텍처 및 흐름도](#아키텍처-및-흐름도)<br>
+[4. 개발](#개발)<br>
+[5. 평가](#평가)<br>
+
 ## 주요 기능
 - 스마트 컨트랙트 업로드
 - 스마트 컨트랙트 대시보드 - 스마트 컨트랙트 검색 / 비교
@@ -14,23 +21,156 @@
 - 블록체인 : Hyperledger Fabric, Fabric Gateway SDK
 - 테스트 : Jmeter, Postman
 
-### 아키텍처 및 흐름도
+## 아키텍처 및 흐름도
 |아키텍처|흐름도|
 |---|---|
 |<img src=https://user-images.githubusercontent.com/78259314/230726935-6c76b1b7-1957-4b9e-a183-929de5144264.png />|<img src=https://user-images.githubusercontent.com/78259314/230726938-931d3093-c87a-4382-bc0d-219458cce80c.png />|
 
 ## 개발
+### 
+#### 게이트웨이 연결
+```golang
+func SetConnection() {
+	log.Println("===============Set Connection ===============")
+	clientConnection := newGrpcConnection()
+	//defer clientConnection.Close()
+	id := newIdentity()
+	sign := newSign()
+
+	gateway, err := client.Connect(
+		id,
+		client.WithSign(sign),
+		client.WithClientConnection(clientConnection),
+		client.WithEvaluateTimeout(5*time.Second),
+		client.WithEndorseTimeout(15*time.Second),
+		client.WithSubmitTimeout(5*time.Second),
+		client.WithCommitStatusTimeout(1*time.Minute),
+	)
+	if err != nil {
+		panic(err)
+	}
+	//defer gateway.Close()
+	network := gateway.GetNetwork(channelName)
+	ContractPass = network.GetContract(chaincodeName)
+}
+```
+#### 트랜잭션
+```golang
+func TransferAsset(contract *client.Contract, transactionRequest TransactionRequest) string {
+	log.Println(contract, "2", transactionRequest.AssetID, transactionRequest.NewOwner)
+
+	submitResult, commit, err := contract.SubmitAsync("TransferAsset", client.WithArguments(transactionRequest.AssetID, transactionRequest.NewOwner))
+	if err != nil {
+		panic(fmt.Errorf("failed to submit transaction asynchronously: %w", err))
+	}
+	fmt.Printf("Successfully submitted transaction to transfer ownership from %s to %s. \n", string(submitResult), transactionRequest.NewOwner)
+
+	if status, err := commit.Status(); err != nil {
+		panic(fmt.Errorf("failed to get commit status: %w", err))
+	} else if !status.Successful {
+		panic(fmt.Errorf("transaction %s failed to commit with status: %d", status.TransactionID, int32(status.Code)))
+	}
+	return string(submitResult)
+}
+```
+#### Elastic Search 
+```golang
+type elasticClient struct {
+	es        *elasticsearch.Client
+	IndexName string
+}
+
+type ESResponse struct {
+	Took int64
+	Hits struct {
+		Total struct {
+			Value int64
+		}
+		Hits []*ESHit
+	}
+}
+
+type ESHit struct {
+	Score   float64 `json:"_score"`
+	Index   string  `json:"_index"`
+	Type    string  `json:"_type"`
+	Version int64   `json:"_version,omitempty"`
+
+	Source Article `json:"_source"`
+}
+func init() {
+	cfg := esClientConfig()
+	es, err := elasticsearch.NewClient(cfg)
+	if err != nil {
+		log.Printf("Error creating the client: %s", err)
+	} else {
+		log.Println(elasticsearch.Version)
+		log.Println(es.Info())
+	}
+	esClient.es = es
+	esClient.IndexName = "smart_contract"
+}
+
+func esClientConfig() elasticsearch.Config {
+	cfg := elasticsearch.Config{
+		Addresses:              []string{"https://localhost:9200"},
+		APIKey:                 "ZkkwZ2dvWUJvNHBGMlQzZXVGZUU6eGJGaHpTY0JTWC1IU2ZvOTdHTk16QQ==",
+		CertificateFingerprint: "6a220394bb428259b1991b3dcce16f7a810499de023d5d0bdb97c32bd762ba14",
+	}
+	//password : Zh-rgUV*3rdM6NhQE+Bo
+	return cfg
+}
+```
+#### Elastic Search 검색
+```golang
+func AddDocumentToES(item *Article) (string, error) {
+	payload, err := json.Marshal(item)
+	if err != nil {
+		log.Println(err)
+		return "", err
+	}
+	ctx := context.Background()
+	req := esapi.IndexRequest{
+		Index:      esClient.IndexName,
+		DocumentID: string(item.ID),
+		Body:       bytes.NewReader(payload),
+		Refresh:    "true",
+	}
+	res, err := req.Do(ctx, esClient.es)
+	if err != nil {
+		log.Fatalf("Error getting rsponse: %s", err)
+	}
+	defer res.Body.Close()
+
+	if res.IsError() {
+		var e map[string]interface{}
+		if err := json.NewDecoder(res.Body).Decode(&e); err != nil {
+			log.Print("payload : ")
+			log.Println(e)
+			log.Println(err)
+			return "", err
+		}
+		log.Print(e)
+		return "", fmt.Errorf("[%s] %s: %s", res.Status(),
+			e["error"].(map[string]interface{})["type"],
+			e["error"].(map[string]interface{})["reason"])
+	}
+
+	return "Contract successfully added to search index", nil
+}
+```
+### 이미지
 |정보|페이지|
 |---|---|
-|<p align="center">스마트 컨트랙트 업로드</p>|<img src=https://user-images.githubusercontent.com/78259314/230725409-607a57a0-d802-4328-b78e-b2194b9fd61d.png width=500, height=500 />|
-|<p align="center">스마트 컨트랙트 리스트</p>|<img src=https://user-images.githubusercontent.com/78259314/230725407-d1db0fb6-fc71-4119-8175-f9b651ae3cd4.png width=600, height=300/>|
-|<p align="center">스마트 컨트랙트 상세 정보</p>|<img src=https://user-images.githubusercontent.com/78259314/230725428-af70880a-5dd2-4c75-99c8-4763ac4e7515.png width=700, height=500/>|
-|<p align="center">스마트 컨트랙트 비교</p>|<img src=https://user-images.githubusercontent.com/78259314/230725432-1d3bbc23-a9df-4648-bb04-f93578ab3014.png width=700, height=500/>|
-|<p align="center">트랜잭션 이벤트</p>|<img src=https://user-images.githubusercontent.com/78259314/230725426-532dad08-5f41-495e-8f3a-3f40a294102d.png width=500, height=300/>|
-
+|<p align="center">스마트 컨트랙트<br>업로드</p>|<img src=https://user-images.githubusercontent.com/78259314/230725409-607a57a0-d802-4328-b78e-b2194b9fd61d.png width=500, height=500 />|
+|<p align="center">스마트 컨트랙트<br>리스트</p>|<img src=https://user-images.githubusercontent.com/78259314/230725407-d1db0fb6-fc71-4119-8175-f9b651ae3cd4.png width=600, height=300/>|
+|<p align="center">스마트 컨트랙트<br>상세 정보</p>|<img src=https://user-images.githubusercontent.com/78259314/230725428-af70880a-5dd2-4c75-99c8-4763ac4e7515.png width=700, height=500/>|
+|<p align="center">스마트 컨트랙트<br>비교</p>|<img src=https://user-images.githubusercontent.com/78259314/230725432-1d3bbc23-a9df-4648-bb04-f93578ab3014.png width=700, height=500/>|
+|<p align="center">트랜잭션<br>이벤트</p>|<img src=https://user-images.githubusercontent.com/78259314/230725426-532dad08-5f41-495e-8f3a-3f40a294102d.png width=500, height=300/>|
 
 ## 평가
-> 본 프로젝트에서는 하이퍼레저 패브릭 네트워크와 연결하기 위해 Fabric Gateway SDK를 활용하였으며, 명령어 기반 실행과 SDK 기반 트랜잭션 성능을 평가하였다.
+> 본 프로젝트에서는 하이퍼레저 패브릭 네트워크와 연결하기 위해 Fabric Gateway SDK를 활용하였으며,<br>
+명령어 기반 실행과 SDK 기반 트랜잭션 성능을 평가하였다.
 
 테스트 방법
 - SDK
@@ -57,7 +197,11 @@
 |![img3](https://user-images.githubusercontent.com/78259314/230723533-4070e3ba-3ed0-4768-8938-afb6b3928e4c.png)|![img4](https://user-images.githubusercontent.com/78259314/230723537-37b80b56-503f-483a-82cb-57853cca28da.png)|
 |<p align="center">평균</p>|<p align="center">최소</p>|
 
-
+### 결과
+- SDK가 CLI보다 성능이 뛰어남.
+- 이유 (정확한 이유는 아님)
+  - Fabric Gateway SDK의 경우 connection pooling 방식을 통해 패브릭 네트워크와 연결되어있음.
+  - 그러나, CLI의 경우 매번 독립적으로 시행되기 때문에 이때마대 패브릭 네트워크와 연결하는 것으로 추측
 
 
 
