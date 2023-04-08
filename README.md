@@ -10,7 +10,7 @@
 [3. 아키텍처 및 흐름도](#아키텍처-및-흐름도)<br>
 [4. 개발](#개발)<br>
 &emsp;[4-1. 코드](#코드)<br>
-&emsp;[4-2. 이미지](#이미지)<br>
+&emsp;[4-2. 화면](#)<br>
 [5. 평가](#평가)<br>
 [6. 결과](#결과)<br><br>
 
@@ -172,8 +172,8 @@ func AddDocumentToES(item *Article) (string, error) {
 }
 ```
 ---
-### 이미지
-|정보|페이지|
+### 화면
+|정보||
 |---|---|
 |<p style="font-size:10pt" align="center">스마트 컨트랙트<br>업로드</p><img width=150/>|<img src=https://user-images.githubusercontent.com/78259314/230725409-607a57a0-d802-4328-b78e-b2194b9fd61d.png width=500, height=500 />|
 |<p align="center">스마트 컨트랙트<br>리스트</p>|<img src=https://user-images.githubusercontent.com/78259314/230725407-d1db0fb6-fc71-4119-8175-f9b651ae3cd4.png width=600, height=300/>|
