@@ -175,12 +175,12 @@ func AddDocumentToES(item *Article) (string, error) {
 ### 이미지
 |정보|페이지|
 |---|---|
-|<p style="font-size:10pt" align="center">스마트 컨트랙트<br>업로드</p>|<img src=https://user-images.githubusercontent.com/78259314/230725409-607a57a0-d802-4328-b78e-b2194b9fd61d.png width=500, height=500 />|
+|<p style="font-size:10pt" align="center">스마트 컨트랙트<br>업로드</p><img width=150/>|<img src=https://user-images.githubusercontent.com/78259314/230725409-607a57a0-d802-4328-b78e-b2194b9fd61d.png width=500, height=500 />|
 |<p align="center">스마트 컨트랙트<br>리스트</p>|<img src=https://user-images.githubusercontent.com/78259314/230725407-d1db0fb6-fc71-4119-8175-f9b651ae3cd4.png width=600, height=300/>|
 |<p align="center">스마트 컨트랙트<br>상세 정보</p>|<img src=https://user-images.githubusercontent.com/78259314/230725428-af70880a-5dd2-4c75-99c8-4763ac4e7515.png width=700, height=500/>|
 |<p align="center">스마트 컨트랙트<br>비교</p>|<img src=https://user-images.githubusercontent.com/78259314/230725432-1d3bbc23-a9df-4648-bb04-f93578ab3014.png width=700, height=500/>|
 |<p align="center">트랜잭션<br>이벤트</p>|<img src=https://user-images.githubusercontent.com/78259314/230725426-532dad08-5f41-495e-8f3a-3f40a294102d.png width=500, height=300/>|
-|<img width=150/>||
+<br>
 
 ## 평가
 > 본 프로젝트에서는 하이퍼레저 패브릭 네트워크와 연결하기 위해 Fabric Gateway SDK를 활용하였으며,<br>
@@ -210,7 +210,7 @@ func AddDocumentToES(item *Article) (string, error) {
 |![img3](https://user-images.githubusercontent.com/78259314/230723533-4070e3ba-3ed0-4768-8938-afb6b3928e4c.png)|![img4](https://user-images.githubusercontent.com/78259314/230723537-37b80b56-503f-483a-82cb-57853cca28da.png)|
 |<p align="center">평균</p>|<p align="center">최소</p>|
 
-### 결과
+## 결과
 - SDK가 CLI보다 성능이 뛰어남.
 - 이유 
   - Fabric Gateway SDK의 경우 connection pooling 방식을 통해 패브릭 네트워크와 연결되어있음.
