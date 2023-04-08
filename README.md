@@ -7,16 +7,30 @@
 - 스마트 컨트랙트 대시보드 - 스마트 컨트랙트 검색 / 비교
 - 스마트 컨트랙트 상세 정보 - 설치 / 다운로드 / 트랜잭션
 
+## 사용 기술
+- 프론트 : React(Typescript)
+- 백엔드 : Gin(Golang)
+- 검색 엔진 & 스토리지 : Elastic Search
+- 블록체인 : Hyperledger Fabric, Fabric Gateway SDK
+- 테스트 : Jmeter, Postman
 
-## 구현
-|||
+### 아키텍처 및 흐름도
+|아키텍처|흐름도|
 |---|---|
-|![img7](https://user-images.githubusercontent.com/78259314/230725409-607a57a0-d802-4328-b78e-b2194b9fd61d.png){: width="50" height="50"}|![img6](https://user-images.githubusercontent.com/78259314/230725407-d1db0fb6-fc71-4119-8175-f9b651ae3cd4.png)
-|![img8](https://user-images.githubusercontent.com/78259314/230725428-af70880a-5dd2-4c75-99c8-4763ac4e7515.png)||![img9](https://user-images.githubusercontent.com/78259314/230725426-532dad08-5f41-495e-8f3a-3f40a294102d.png)
-|![img5](https://user-images.githubusercontent.com/78259314/230725432-1d3bbc23-a9df-4648-bb04-f93578ab3014.png)|
+|<img src=https://user-images.githubusercontent.com/78259314/230726935-6c76b1b7-1957-4b9e-a183-929de5144264.png />|<img src=https://user-images.githubusercontent.com/78259314/230726938-931d3093-c87a-4382-bc0d-219458cce80c.png />|
+
+## 개발
+|정보|페이지|
+|---|---|
+|<p align="center">스마트 컨트랙트 업로드</p>|<img src=https://user-images.githubusercontent.com/78259314/230725409-607a57a0-d802-4328-b78e-b2194b9fd61d.png width=500, height=500 />|
+|<p align="center">스마트 컨트랙트 리스트</p>|<img src=https://user-images.githubusercontent.com/78259314/230725407-d1db0fb6-fc71-4119-8175-f9b651ae3cd4.png width=600, height=300/>|
+|<p align="center">스마트 컨트랙트 상세 정보</p>|<img src=https://user-images.githubusercontent.com/78259314/230725428-af70880a-5dd2-4c75-99c8-4763ac4e7515.png width=700, height=500/>|
+|<p align="center">스마트 컨트랙트 비교</p>|<img src=https://user-images.githubusercontent.com/78259314/230725432-1d3bbc23-a9df-4648-bb04-f93578ab3014.png width=700, height=500/>|
+|<p align="center">트랜잭션 이벤트</p>|<img src=https://user-images.githubusercontent.com/78259314/230725426-532dad08-5f41-495e-8f3a-3f40a294102d.png width=500, height=300/>|
+
 
 ## 평가
-> 본 프로젝트에서는 하이퍼레저 패브릭 네트워크와 연결하기 위해 Fabric Gateway SDK를 활용하였으며, 명령어 기반 실행과 SDK 기반 실행 성능을 평가하였다.
+> 본 프로젝트에서는 하이퍼레저 패브릭 네트워크와 연결하기 위해 Fabric Gateway SDK를 활용하였으며, 명령어 기반 실행과 SDK 기반 트랜잭션 성능을 평가하였다.
 
 테스트 방법
 - SDK
@@ -35,6 +49,7 @@
   - => 결과적으로 첫 번째 튀는 값을 제외한 나머지들을 통해서 min,avg,max 값을 평가함.
 
 ### Charts
+
 | | |
 |---|---|
 |![img1](https://user-images.githubusercontent.com/78259314/230723374-26c2b3e4-9c85-409f-94bc-78ec8fea9010.png)|![img2](https://user-images.githubusercontent.com/78259314/230723436-cb8fa374-dc61-417e-9c9c-4d26c184e6b9.png)|
