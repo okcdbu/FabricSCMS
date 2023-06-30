@@ -32,7 +32,7 @@
 ## 아키텍처 및 흐름도
 |아키텍처|흐름도|
 |---|---|
-|<img src=https://user-images.githubusercontent.com/78259314/230726935-6c76b1b7-1957-4b9e-a183-929de5144264.png />|<img src=https://user-images.githubusercontent.com/78259314/230726938-931d3093-c87a-4382-bc0d-219458cce80c.png />|
+|<img src="https://github.com/jhl8109/jhl8109/assets/78259314/6254b5e5-2d13-42ec-b050-fbf826ddd63e" />|<img src=https://user-images.githubusercontent.com/78259314/230726938-931d3093-c87a-4382-bc0d-219458cce80c.png />|
 <br>
 
 ## 개발
