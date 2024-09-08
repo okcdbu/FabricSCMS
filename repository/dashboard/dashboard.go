@@ -14,8 +14,8 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/jhl8109/FabricAPI/admin"
-	"github.com/jhl8109/FabricAPI/repository/search"
+	"github.com/okcdbu/FabricSCMS/admin"
+	"github.com/okcdbu/FabricSCMS/repository/search"
 )
 
 type installCC struct {
@@ -43,12 +43,12 @@ type Asset struct {
 var (
 	peerAddressOrg1 = "localhost:7051"
 	peerAddressOrg2 = "localhost:9051"
-	GOPATH          = os.Getenv("GOPATH")
-	networkPath     = fmt.Sprintf("%s/src/github.com/hyperledger/fabric-samples/test-network", GOPATH)
-	scriptPath      = fmt.Sprintf("%s/src/github.com/hyperledger/fabric-samples/test-network/scripts", GOPATH)
+	GOPATH          = os.Getwd()
+	networkPath     = fmt.Sprintf("%s/hyperledger/fabric-samples/test-network", GOPATH)
+	scriptPath      = fmt.Sprintf("%s//hyperledger/fabric-samples/test-network/scripts", GOPATH)
 	now             = time.Now()
 	assetId         = fmt.Sprintf("asset%d", now.Unix()*1e3+int64(now.Nanosecond()/1e6))
-	CCPATHROOT      = "/home/jeho/Downloads/chaincodes"
+	CCPATHROOT      = "/home/ubuntu/chaincodes"
 )
 
 // FileUpload

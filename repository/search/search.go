@@ -63,6 +63,7 @@ var (
 )
 
 func init() {
+	// ElasticSearch 클라이언트 초기화
 	cfg := esClientConfig()
 	es, err := elasticsearch.NewClient(cfg)
 	if err != nil {
@@ -76,12 +77,10 @@ func init() {
 }
 
 func esClientConfig() elasticsearch.Config {
+	// 보안 설정 없이 로컬 ElasticSearch 서버에 연결
 	cfg := elasticsearch.Config{
-		Addresses:              []string{"https://localhost:9200"},
-		APIKey:                 "ajVuZzE0SUJlczZ5ZEtIV2FEaDI6Wjh0ZXZySmNSaG1HbTBkakpGcC1pdw==",
-		CertificateFingerprint: "39342712d2129a0a4bb9c835452777108e30588860ae260f6b11a7e53aae7659",
+		Addresses: []string{"http://localhost:9200"},  // HTTP 프로토콜로 로컬 서버 연결
 	}
-	//password : XEGwyYour=Xi*wdhYIRl
 	return cfg
 }
 

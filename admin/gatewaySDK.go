@@ -30,15 +30,15 @@ const (
 )
 
 var (
-	GOPATH       = os.Getenv("GOPATH")
-	cryptoPath   = fmt.Sprintf("%s/src/github.com/hyperledger/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com", GOPATH)
+	GOPATH       = os.Getwd()
+	cryptoPath   = fmt.Sprintf("%s/hyperledger/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com", GOPATH)
 	certPath     = cryptoPath + "/users/User1@org1.example.com/msp/signcerts/cert.pem"
 	keyPath      = cryptoPath + "/users/User1@org1.example.com/msp/keystore/"
 	tlsCertPath  = cryptoPath + "/peers/peer0.org1.example.com/tls/ca.crt"
 	now          = time.Now()
 	assetId      = fmt.Sprintf("asset%d", now.Unix()*1e3+int64(now.Nanosecond())/1e6)
 	ContractPass = &client.Contract{}
-	networkPath  = fmt.Sprintf("%s/src/github.com/hyperledger/fabric-samples/test-network", GOPATH)
+	networkPath  = fmt.Sprintf("%s/hyperledger/fabric-samples/test-network", GOPATH)
 )
 
 type TransactionRequest struct {
