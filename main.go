@@ -26,9 +26,7 @@ import (
 // @contact.url https://github.com/arogyaGurkha
 func main() {
 	log.Println("==========Application Start==========")
-
 	admin.SetConnection()
-
 	updateSwagger()
 	router := setupRouter()
 	router.Run(":8080")

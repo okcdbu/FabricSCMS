@@ -30,7 +30,7 @@ const (
 )
 
 var (
-	GOPATH       = os.Getwd()
+	GOPATH       = "/home/ubuntu"
 	cryptoPath   = fmt.Sprintf("%s/hyperledger/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com", GOPATH)
 	certPath     = cryptoPath + "/users/User1@org1.example.com/msp/signcerts/cert.pem"
 	keyPath      = cryptoPath + "/users/User1@org1.example.com/msp/keystore/"

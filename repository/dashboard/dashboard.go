@@ -43,7 +43,7 @@ type Asset struct {
 var (
 	peerAddressOrg1 = "localhost:7051"
 	peerAddressOrg2 = "localhost:9051"
-	GOPATH          = os.Getwd()
+	GOPATH          = "/home/ubuntu"
 	networkPath     = fmt.Sprintf("%s/hyperledger/fabric-samples/test-network", GOPATH)
 	scriptPath      = fmt.Sprintf("%s//hyperledger/fabric-samples/test-network/scripts", GOPATH)
 	now             = time.Now()

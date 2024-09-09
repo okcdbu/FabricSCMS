@@ -1,4 +1,4 @@
-module github.com/jhl8109/FabricAPI
+module github.com/okcdbu/FabricSCMS
 
 go 1.16
 
