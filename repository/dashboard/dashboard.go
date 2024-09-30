@@ -44,8 +44,8 @@ var (
 	peerAddressOrg1 = "localhost:7051"
 	peerAddressOrg2 = "localhost:9051"
 	GOPATH          = "/home/ubuntu"
-	networkPath     = fmt.Sprintf("%s/hyperledger/fabric-samples/test-network", GOPATH)
-	scriptPath      = fmt.Sprintf("%s//hyperledger/fabric-samples/test-network/scripts", GOPATH)
+	networkPath     = fmt.Sprintf("%s/fabric-samples/test-network", GOPATH)
+	scriptPath      = fmt.Sprintf("%s/fabric-samples/test-network/scripts", GOPATH)
 	now             = time.Now()
 	assetId         = fmt.Sprintf("asset%d", now.Unix()*1e3+int64(now.Nanosecond()/1e6))
 	CCPATHROOT      = "/home/ubuntu/chaincodes"
