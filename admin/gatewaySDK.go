@@ -30,14 +30,14 @@ const (
 
 var (
 	GOPATH       = "/home/ubuntu"
-	cryptoPath   = fmt.Sprintf("%s/hyperledger/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com", GOPATH)
+	cryptoPath   = fmt.Sprintf("%s/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com", GOPATH)
 	certPath     = cryptoPath + "/users/User1@org1.example.com/msp/signcerts/cert.pem"
 	keyPath      = cryptoPath + "/users/User1@org1.example.com/msp/keystore/"
 	tlsCertPath  = cryptoPath + "/peers/peer0.org1.example.com/tls/ca.crt"
 	now          = time.Now()
 	assetId      = fmt.Sprintf("asset%d", now.Unix()*1e3+int64(now.Nanosecond())/1e6)
 	ContractPass = &client.Contract{}
-	networkPath  = fmt.Sprintf("%s/hyperledger/fabric-samples/test-network", GOPATH)
+	networkPath  = fmt.Sprintf("%s/fabric-samples/test-network", GOPATH)
 )
 
 type TransactionRequest struct {
@@ -74,7 +74,7 @@ func SetConnection() {
 	network := gateway.GetNetwork(channelName)
 	ContractPass = network.GetContract(chaincodeName)
 	fmt.Println("initLedger:")
-	InitLedger(ContractPass)
+	//InitLedger(ContractPass)
 }
 
 /*
