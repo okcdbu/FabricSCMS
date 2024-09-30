@@ -30,8 +30,18 @@ func main() {
 	admin.SetConnection()
 	updateSwagger()
 	setEnvironmentVariables()
+	printEnvironmentVariables()
 	router := setupRouter()
 	router.Run(":8080")
+}
+func printEnvironmentVariables() {
+    fmt.Println("### PATH 환경 변수 ###")
+    fmt.Println(os.Getenv("PATH"))
+    
+    fmt.Println("\n### 전체 환경 변수 목록 ###")
+    for _, env := range os.Environ() {
+        fmt.Println(env)
+    }
 }
 func setEnvironmentVariables() {
     // 환경 변수 설정
