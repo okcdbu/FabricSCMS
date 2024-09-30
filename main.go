@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"os/exec"
+	"os"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -28,10 +29,21 @@ func main() {
 	log.Println("==========Application Start==========")
 	admin.SetConnection()
 	updateSwagger()
+	setEnvironmentVariables()
 	router := setupRouter()
 	router.Run(":8080")
 }
-
+func setEnvironmentVariables() {
+    // 환경 변수 설정
+    os.Setenv("CORE_PEER_TLS_ENABLED", "true")
+    os.Setenv("CORE_PEER_LOCALMSPID", "Org1MSP")
+    os.Setenv("CORE_PEER_TLS_ROOTCERT_FILE", fmt.Sprintf("%s/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt", os.Getenv("PWD")))
+    os.Setenv("CORE_PEER_MSPCONFIGPATH", fmt.Sprintf("%s/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp", os.Getenv("PWD")))
+    os.Setenv("CORE_PEER_ADDRESS", "localhost:7051")
+    os.Setenv("PATH", fmt.Sprintf("%s:%s/../bin/", os.Getenv("PATH"), os.Getenv("PWD")))
+    os.Setenv("FABRIC_CFG_PATH", fmt.Sprintf("%s/../config/", os.Getenv("PWD")))
+    os.Setenv("ORDERER_CA", fmt.Sprintf("%s/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem", os.Getenv("PWD")))
+}
 func setupRouter() *gin.Engine {
 	router := gin.Default()
 
