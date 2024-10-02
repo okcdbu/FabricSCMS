@@ -29,7 +29,7 @@ const (
 )
 
 var (
-	GOPATH       = "/home/ubuntu"
+	GOPATH       = "/home/cb-user"
 	cryptoPath   = fmt.Sprintf("%s/fabric-samples/test-network/organizations/peerOrganizations/org1.example.com", GOPATH)
 	certPath     = cryptoPath + "/users/User1@org1.example.com/msp/signcerts/cert.pem"
 	keyPath      = cryptoPath + "/users/User1@org1.example.com/msp/keystore/"
