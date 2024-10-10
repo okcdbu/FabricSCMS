@@ -42,7 +42,7 @@ func InvokeCC(c *gin.Context) {
 	var requestBody invokeCCRequest
 	var orderer ordererInfo
 	var peer1, peer2 peerInfo
-	GOPATH := "/home/ubuntu"
+	GOPATH := "/home/cb-user"
 	networkPath := fmt.Sprintf("%s/hyperledger/fabric-samples/test-network", GOPATH)
 
 	orderer.IP = "localhost:7050"
