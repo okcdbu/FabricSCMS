@@ -95,7 +95,7 @@ func InstallWithDeployCC(c *gin.Context) {
 	finalCCPath := fmt.Sprintf("%s/%s", CCPATHROOT, requestBody.CCPath)
 	log.Println("Deploying chaincode...")
 	log.Println(fmt.Sprintf("CCName :%s, ccPath :%s, finalCCPath : %s", requestBody.CCName, requestBody.CCPath, finalCCPath))
-	cmd := exec.Command("bash", "./scripts/deployTarCC.sh", "mychannel", requestBody.CCName, requestBody.CCLanguage)
+	cmd := exec.Command("bash", "./scripts/deployCC.sh", "mychannel", requestBody.CCName, requestBody.CCPath, requestBody.CCLanguage)
 	cmd.Dir = networkPath
 
 	output, err := cmd.CombinedOutput()
